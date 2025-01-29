@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-import InputBox from "../components/InputBox"; // Import the InputBox component
-
+import InputBox from "../components/InputBox";
+import { toast } from "react-toastify";
 const EditForm = () => {
-  const { id } = useParams(); // Extract id from URL
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     image: "",
   });
   const navigate = useNavigate();
-  const isEditMode = !!id; // Determine if we're in edit mode
+  const isEditMode = !!id;
 
-  // Fetch existing data if in Edit Mode
   useEffect(() => {
     if (isEditMode) {
       const fetchData = async () => {
@@ -23,7 +22,7 @@ const EditForm = () => {
           );
           setFormData(res.data.data);
         } catch (error) {
-          console.error("Error fetching data:", error);
+          toast.error("Error fetching data:", error);
         }
       };
       fetchData();
@@ -51,8 +50,8 @@ const EditForm = () => {
             },
           }
         );
-        console.log(res);
-        alert("Data updated successfully!");
+
+        toast.success("Data updated successfully!");
       } else {
         // Add new entry
         await axios.post(
@@ -64,11 +63,11 @@ const EditForm = () => {
             },
           }
         );
-        alert("Data added successfully!");
+        toast.success("Data added successfully!");
       }
-      navigate("/"); // Redirect to the main page
+      navigate("/");
     } catch (error) {
-      console.error("Error submitting form:", error);
+      toast.error("Error submitting form:", error);
     }
   };
 
@@ -76,7 +75,6 @@ const EditForm = () => {
     <div className="min-h-[37.8rem] px-11 py-5">
       <h1 className="text-3xl mb-5">{isEditMode ? "Edit Data" : "Add Data"}</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        {/* Reusable InputBox for Title */}
         <InputBox
           title="Title"
           gitValue={formData.title}
@@ -84,16 +82,14 @@ const EditForm = () => {
           placeholder="Enter title"
           style="p-2 border rounded-md"
         />
-        {/* Reusable InputBox for Description */}
         <InputBox
           title="Description"
           gitValue={formData.description}
           setValue={(value) => handleChange("description", value)}
           placeholder="Enter description"
           style="p-2 border rounded-md"
-          type="textarea" // Adjust as needed if InputBox supports different types
+          type="textarea"
         />
-        {/* Reusable InputBox for Image URL */}
         <InputBox
           title="Image URL"
           gitValue={formData.image}
@@ -102,7 +98,6 @@ const EditForm = () => {
           style="p-2 border rounded-md"
           type="file"
         />
-        {/* Submit Button */}
         <button
           type="submit"
           className="p-3 bg-black text-white rounded-md hover:bg-gray-800">

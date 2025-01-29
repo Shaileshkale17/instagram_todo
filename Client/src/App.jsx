@@ -5,13 +5,14 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 import Navber from "./components/Navber";
 import Footer from "./components/Footer";
-
+import { ToastContainer } from "react-toastify";
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <>
       <Navber />
+      <ToastContainer />
       <Outlet />
       <Footer />
     </>

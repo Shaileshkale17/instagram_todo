@@ -5,34 +5,35 @@ import { useNavigate, useParams } from "react-router-dom";
 import { format } from "timeago.js";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 const Edit = () => {
   const [data, setData] = useState([]);
-  const { id } = useParams(); // Extract the id from useParams
+  const [showPopup, setShowPopup] = useState(false);
+  const { id } = useParams();
   const navigate = useNavigate();
+
   const getdata = async (id) => {
     try {
       const res = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/getByid/${id}`
       );
-      console.log("res", res);
       setData(res.data.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      toast.error("Error fetching data:", error);
     }
   };
 
   const deleted = async (ids) => {
-    console.log("Deleted", ids);
     try {
       const res = await axios.delete(
         `${import.meta.env.VITE_BACKEND_URL}/deleted/${ids}`
       );
-      // console.log(res);
-      if (res.status == 200) {
+      if (res.status === 200) {
+        toast.info("Todo Deleted successfully");
         navigate("/");
       }
     } catch (error) {
-      console.error("Error deleting data:", error);
+      toast.error("Error deleting data:", error);
     }
   };
 
@@ -56,7 +57,7 @@ const Edit = () => {
           <h1 className="text-3xl">{data.title}</h1>
           <p>{data.createdAt ? format(data.createdAt) : "Unknown date"}</p>
           <div className="flex flex-row flex-wrap gap-4.5">
-            <Button Title="Delete Me" Click={() => deleted(data._id)} />
+            <Button Title="Delete Me" Click={() => setShowPopup(true)} />
             <Link to={`/edit_form/${data._id}`}>
               <Button Title="Update Me" />
             </Link>
@@ -64,6 +65,28 @@ const Edit = () => {
           <p className="mt-4.5">{data.description}</p>
         </div>
       </div>
+
+      {/* Delete Confirmation Popup */}
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black-800 bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h2 className="text-lg font-semibold">Are you sure?</h2>
+            <p className="text-gray-600">
+              You can delete this Todo. If you're sure, click the delete button.
+            </p>
+            <div className="flex justify-center gap-4 mt-4">
+              <Button Title="Cancel" Click={() => setShowPopup(false)} />
+              <Button
+                Title="Delete"
+                Click={() => {
+                  deleted(data._id);
+                  setShowPopup(false);
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

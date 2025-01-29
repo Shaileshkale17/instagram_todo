@@ -12,7 +12,7 @@ export const createTodo = async (req, res) => {
     }
     await ConnectCloudinary();
     const imageUrlLocalPath = req.files?.image[0]?.path;
-    console.log("imageUrlLocalPath", imageUrlLocalPath);
+    // console.log("imageUrlLocalPath", imageUrlLocalPath);
     let result = await cloudinary.uploader.upload(imageUrlLocalPath, {
       resource_type: "image",
     });
@@ -148,7 +148,7 @@ export const deleted = async (req, res) => {
     await ConnectCloudinary();
 
     const data = await instagramTodo.findById(req.params.id);
-    console.log(data);
+    // console.log(data);
     if (!data) {
       return res.status(404).json({
         success: false,
