@@ -18,7 +18,7 @@ const Home = () => {
   }, [setData]);
 
   return (
-    <div className=" lg:mx-10 flex flex-col min-h-full lg:min-h-screen">
+    <div className=" lg:mx-10 flex flex-col  min-h-screen">
       <div className="flex justify-end mb-3.5 lg:mb-0">
         <Link to={`/add_form`}>
           <Button Title="Add Todo" />
