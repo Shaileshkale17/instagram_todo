@@ -18,8 +18,8 @@ const Home = () => {
   }, [setData]);
 
   return (
-    <div className="mx-10 flex flex-col min-h-screen">
-      <div className="flex justify-end">
+    <div className=" lg:mx-10 flex flex-col min-h-full lg:min-h-screen">
+      <div className="flex justify-end mb-3.5 lg:mb-0">
         <Link to={`/add_form`}>
           <Button Title="Add Todo" />
         </Link>
@@ -27,14 +27,14 @@ const Home = () => {
 
       <div className="flex justify-center ">
         <InputBox
-          style="w-[30rem] pl-11 py-1.5 rounded-2xl border"
+          style="w-full lg:w-[30rem] pl-11 py-1.5 rounded-2xl border"
           type="search"
           placeholder="search your todo"
           gitValue={search}
           setValue={setSearch}
         />
       </div>
-      <div className="flex flex-row flex-wrap w-full gap-8 md:gap-11 justify-start my-10">
+      <div className="flex flex-row flex-wrap w-full gap-8 md:gap-11 justify-center lg:justify-start my-10">
         {data
           ?.filter(
             (item) =>

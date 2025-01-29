@@ -72,7 +72,7 @@ const EditForm = () => {
   };
 
   return (
-    <div className="min-h-[37.8rem] px-11 py-5">
+    <div className="h-[37.3rem] lg:min-h-[37.8rem] px-11 py-5">
       <h1 className="text-3xl mb-5">{isEditMode ? "Edit Data" : "Add Data"}</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <InputBox
