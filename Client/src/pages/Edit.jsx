@@ -48,7 +48,7 @@ const Edit = () => {
     <div
       className={`${
         data.description && data.description.length >= 40
-          ? "h-full md:h-[46rem]  "
+          ? "min-h-screen"
           : "h-[37.3rem]"
       } lg:min-h-[37.8rem] px-2.5 md:px-11 py-5 overflow-y-hidden flex flex-wrap`}>
       <div className="flex flex-col md:flex-row gap-14">
