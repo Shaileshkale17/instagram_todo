@@ -68,7 +68,7 @@ const Edit = () => {
               <Button Title="Update Me" />
             </Link>
           </div>
-          <p className="mt-4.5 w-[18rem] md:w-full">
+          <p className="mt-4.5 w-full">
             {data.description || "No description available"}
           </p>
         </div>
