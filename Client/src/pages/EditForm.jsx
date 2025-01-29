@@ -44,7 +44,12 @@ const EditForm = () => {
         // Update existing entry
         const res = await axios.put(
           `${import.meta.env.VITE_BACKEND_URL}/updated/${id}`,
-          formData
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
         );
         console.log(res);
         alert("Data updated successfully!");
@@ -52,7 +57,12 @@ const EditForm = () => {
         // Add new entry
         await axios.post(
           `${import.meta.env.VITE_BACKEND_URL}/create`,
-          formData
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
         );
         alert("Data added successfully!");
       }
