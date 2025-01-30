@@ -49,7 +49,7 @@ const Edit = () => {
       className={`${
         data.description && data.description.length >= 40
           ? "min-h-screen"
-          : "h-[37.3rem]"
+          : "h-[37.3rem] "
       } lg:min-h-[37.8rem] px-2.5 md:px-11 py-5 overflow-y-hidden flex flex-wrap`}>
       <div className="flex flex-col md:flex-row gap-14">
         <div className="w-full">
@@ -59,7 +59,7 @@ const Edit = () => {
             className="h-[18rem] w-full mt-2 lg:mt-0    lg:h-[36rem] lg:w-[40rem] object-contain "
           />
         </div>
-        <div className="flex flex-col flex-wrap gap-1.5">
+        <div className="flex w-full flex-col flex-wrap gap-1.5">
           <h1 className="text-3xl">{data.title}</h1>
           <p>{data.createdAt ? format(data.createdAt) : "Unknown date"}</p>
           <div className="flex flex-row flex-wrap gap-4.5">
