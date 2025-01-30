@@ -100,7 +100,7 @@ http://localhost:5173
 ## Folder Structure
 
 ```
-instagram-post-management/
+instagram_todo/
 │── backend/
 │   ├── Config/
 │   │   ├── cloudinary.js
